@@ -62,35 +62,8 @@ list.files(ppath = "r-davis-in-class-project-casrodrig/data/")
 
 #add scripts folder
 ?dir.create
-#the path needs to be character ("") bc it is an invalid argument for an object
 dir.create(path = "scripts")
 
-#be sure to commit and push changes through git tab on the side so your updates are changed in git.com
-#do no save workspace when R asks, just save your scripts or this will populate a new folder in your working directory that you don't need or want
 
 
-#--------------------------------
-#vectors and how you do things with vectors; a vector is an arbitrary lenght in R
-?vector
-weight <- vector()
-weight
-str(weight)  #a way to view objects
-length(weight) #another way to see your object length
 
-weight <- c(5, 10, 200, 24) #need the c when assigning weights to objects
-str(weight)
-class(weight)  #will tell you the type of weight the object is
-is.numeric(weight)  #this will also let you know if it is a numeric weight
-
-head(weight)#to see the short-hand of the top or bottom of an object
-head(weight, n = 2) #this will allow you to see the first two columns
-tail(weight, n=2)  #this will allow you to see the last two columns
-
-weight <- c(weight, 39)  #create an object called weight and combine it with something else (here 39); you are adding something to a vector; you added the number 39
-
-weight[3]  #if you want to remove an object from a vector you use index; you use bracets instead; if you wanted to remove the number 200 you would need to put 3 in the bracets because it's the third object in the vector
-
-weight[c(3:1)] #remove more than one object 
-#you can have R display the order in any direction you want
-1:3
-3:1
