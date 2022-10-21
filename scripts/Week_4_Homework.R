@@ -1,5 +1,5 @@
 #By now you should be in the rhythm of pulling from your git repository and then creating new homework script. This week the homework will review data manipulation in the tidyverse.
-
+library(tidyverse)
 #Create a tibble named surveys from the portal_data_joined.csv file.
 surveys_hw4 <- read_csv(file = "data/portal_data_joined.csv")
 
@@ -20,11 +20,15 @@ biggest_critters <- surveys_hw4 %>%
 
 
 #Try to figure out where the NA weights are concentrated in the data- is there a particular species, taxa, plot, or whatever, where there are lots of NA values? There isn’t necessarily a right or wrong answer here, but manipulate surveys a few different ways to explore this. Maybe use tally and arrange here.
+
+#colsums will show you how many NAs you have for each variable
+colSums(is.na(surveys))/nrow(surveys)
+
 surveys %>% 
-  filter(is.na(weight)) %>% 
+  filter(is.na(weight)) %>%  
   group_by(sex) %>% 
   tally() %>% 
-  arrange(desc(n))
+  arrange(desc(n))           # desc is a function to arrange sex in descending order
 
 surveys %>% 
   filter(is.na(weight)) %>% 
@@ -35,8 +39,8 @@ surveys %>%
 surveys %>% 
   filter(is.na(weight)) %>% 
   group_by(year) %>% 
-  tally() %>% 
-  arrange(desc(n))
+  tally() %>%                   
+  arrange(desc(n))         # tally is a convenient wrapper for summarise that will either call n or sum(n) depending on whether you're tallying for the first time, or re-tallying.
 
 #Take surveys, remove the rows where weight is NA and add a column that contains the average weight of each species+sex combination to the full surveys dataframe. Then get rid of all the columns except for species, sex, weight, and your new average weight column. Save this tibble as surveys_avg_weight.
 
@@ -55,3 +59,4 @@ surveys_above_avg_weight <- surveys_avg_weight %>%
 
 
 surveys_above_avg_weight
+
