@@ -130,7 +130,7 @@ length(unique(surveys_weight$plot_id)) # 24 plots ids -- (make these the) column
 weights_wide <-  pivot_wider(data = surveys_weight,
                              names_from = plot_id,
                              values_from = mean_weight)
-weights_wide  # we now have a tibble that is 10x25, which makes sense bc we have 24 plot_ids and have a genus column with 25 and only 10 rows, one genus that is represented; in the cells from this values_from, we have our mean weight values; this is a much more readable summary table then the 196X3, so this takes data that is long and pivoting it to a wider format
+view(weights_wide)  # we now have a tibble that is 10x25, which makes sense bc we have 24 plot_ids and have a genus column with 25 and only 10 rows, one genus that is represented; in the cells from this values_from, we have our mean weight values; this is a much more readable summary table then the 196X3, so this takes data that is long and pivoting it to a wider format
 
 # we can also do this in reverse, so the pivot-longer function works quite similarly, there is lots of functionality to it, but we will just talk about the core arguments, which are similar with wider, with one longer, which is this column argument:
 

@@ -3,7 +3,7 @@ host <- 'www.rdaviscode.com'
 psswd <- 'nifflers'
 user <- 'rdavis'
 id <- ngRok::livestream_start(hostname = host,password = psswd,user = user,port = 8080)
-
+view(surveys)
 #livestream_stop(id)
 
 # Pivot functions ----
@@ -64,5 +64,6 @@ group_by(surveys, year, plot_id) %>%
 pivot_wider(names_from = year, values_from = genus_count)
 
 #each year is a column, eaxh eoq ia Plot ID and inside the cells are the counds of genera (per plot, per year)
+
 
 
