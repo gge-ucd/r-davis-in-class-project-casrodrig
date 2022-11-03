@@ -27,6 +27,11 @@ surveys_cat_weight <- surveys %>%
     weight > 20.00 & weight < 48.00 ~ "medium",  # finally got it to work! Ok NA_character_ will keep NAs as themseleves and not count them as a categorie we made
     weight >= 48.00 ~ "large"
     ))
+
+surveys_cat_weight %>%
+  filter(is.na(weight)) %>%
+  select(weight, weight_cat) %>%
+  head()
  
 surveys_cat_weight$weight_cat
 
@@ -38,7 +43,11 @@ surveys_cat_weight <- surveys %>%
     weight >= summ[[2]] ~ "small",
     weight > summ[[2]] & weight < summ[[5]] ~ "medium",    
     weight >= summ[[5]] ~ "large" 
-    ))                                                      # I won't lie, I had to look at the code for this...this one was a struggle for me....I didn't think to rename the summary function within the pipe and this code I have is just giving me a bunch of "small" and NA, but no medium or large....I am not sure how to fix this
+    ))   
+
+surveys_cat_weight %>% 
+  head()
+# I won't lie, I had to look at the code for this...this one was a struggle for me....I didn't think to rename the summary function within the pipe and this code I have is just giving me a bunch of "small" and NA, but no medium or large....I am not sure how to fix this
 
 
 # in the summary functinon you will see that the first quartile is the 2nd value and the third quartile is the 5th value...index using brackets; oh and you have to use the sum funciton because you have to tell R that you want the data from the 2nd and 5th value in the summary function
