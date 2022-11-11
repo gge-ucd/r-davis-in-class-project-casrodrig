@@ -18,12 +18,15 @@ gapminder <- read_csv("https://gge-ucd.github.io/R-DAVIS/data/gapminder.csv")
 # 1. First calculates mean life expectancy on each continent. Then create a plot that shows how life expectancy has changed over time in each continent. Try to do this all in one step using pipes! (aka, try not to create intermediate data frames)
 
 # need to group continent by year to show how life expectancy has changed over time in each continent, can do this by summarizing the mean life expectancy in the summarize function
-LifeExp_Time <- gapminder %>% 
+
+#then create a scatterplot and draw a line to show the trend in average life expectancy for each continent
+
+gapminder %>% 
   group_by(continent, year) %>% 
-  summarize(mean_LE = mean(lifeExp)) %>% #then create a scatterplot and draw a line to show the trend in average life expectancy for each continent
+  summarize(mean_LE = mean(lifeExp)) %>% 
   ggplot() +
   geom_point(aes(x = year, y = mean_LE, color = continent))+
-  geom_line(aes(x = year, y = mean_lifeExp, color = continent))
+  geom_line(aes(x = year, y = mean_LE, color = continent))
 
 # 2. Look at the following code and answer the following questions. What do you think the scale_x_log10() line of code is achieving? What about the geom_smooth() line of code?
 
@@ -43,15 +46,15 @@ LifeExp_Time <- gapminder %>%
 # for the aes we want to define what our x, and y variables are so it will be the columns you want for each in your data set
 
 
-LifeExp_Time_Themed <- gapminder %>% 
-  group_by(continent, year) %>% 
-  summarize(mean_LE = mean(lifeExp)) %>%
-ggplot(aes(x = gdpPercap, y = lifeExp)) + 
-  geom_point(mapping = aes(color = continent, size = 20)) +
+
+ggplot(gapminder, aes(x = gdpPercap, y = lifeExp)) + 
+  geom_point(mapping = aes(alpha = .5, color = continent, size = pop)) +
   scale_x_log10() +
   geom_smooth(method = 'gam', color = 'pink', linetype = 'solid') +
-  theme_grey()
-
+  theme(panel.background = element_rect(fill = "grey", colour = "black"), plot.background = element_rect(fill = "light yellow"), panel.grid = element_line("NA"))
+             
+             
+?theme
 
 ## `geom_smooth()` using formula 'y ~ x'
 
@@ -63,8 +66,8 @@ countries <- c("Brazil", "China", "El Salvador", "Niger", "United States") # i c
 gapminder %>% 
   filter(country %in% countries) %>%     # %in% operator in R can be used to identify if an element (e.g., a number) belongs to a vector or dataframe
   ggplot(aes(x = country, y = lifeExp))+
-  geom_boxplot() +
-  geom_jitter(alpha = 0.6, color = "pink")+  # i made the alpha at 0.6 so I could see my points betrter because I used pink, put jitter here so dots are in the background
+  geom_boxplot(fill = "pink") +
+  geom_jitter(alpha = 0.6, color = "green")+  # i made the alpha at 0.6 so I could see my points betrter because I used pink, put jitter here so dots are in the background
   theme_classic() +
   ggtitle("Life Expectancy of Five Countries") + #title the figure
   xlab("Country") + ylab("Life Expectancy") #To set labels for X and Y axes in R plot, call plot() function and along with the data to be plot, pass required string values for the X and Y axes labels to the “xlab” and “ylab” parameters respectively. By default X-axis label is set to “x”, and Y-axis label is set to “y”.
